@@ -1,5 +1,6 @@
 {
   "name": "ts-templace",
+  "license": "UNLICENSED",
   "version": "1.0.0",
   "scripts": {
     "build": "tsc",
@@ -12,9 +13,13 @@
   "description": "Yet another typescript template",
   "main": "dist/index.js",
   "private": false,
-  "dependencies": {},
+  "dependencies": {
+    "express": "^4.17.2",
+    "expresss": "^0.0.0"
+  },
   "devDependencies": {
     "@tsconfig/node16": "^1.0.2",
+    "@types/express": "^4.17.13",
     "@types/jest": "^25.2.3",
     "@types/node": "^15.12.3",
     "jest": "^27.0.4",
