@@ -1,0 +1,6 @@
+node_modules
+dist
+yarn-error.js
+conf.env
+yarn-error.log
+reports/
