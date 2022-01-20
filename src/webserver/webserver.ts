@@ -1,4 +1,5 @@
 import express from "express";
+import cors from "cors";
 import * as http from "http";
 
 export class Webserver {
@@ -6,6 +7,8 @@ export class Webserver {
   server?: http.Server;
   constructor() {
     this.app = express();
+
+    this.app.use(cors());
 
     this.app.get("/", (req, res) => {
       res.send("hello!");
