@@ -9,9 +9,15 @@ export class Webserver {
     this.app = express();
 
     this.app.use(cors());
+    this.app.use(express.json());
 
     this.app.get("/", (req, res) => {
       res.send("hello!");
+    });
+
+    this.app.put("/", (req, res) => {
+      console.log(req.body);
+      res.sendStatus(200);
     });
   }
 
