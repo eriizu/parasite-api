@@ -9,10 +9,6 @@ https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predica
 https://fettblog.eu/typescript-hasownproperty/
 https://devblogs.microsoft.com/typescript/announcing-typescript-4-0-beta/#unknown-on-catch
 
-## add bot
+## postgres
 
-https://discord.com/oauth2/authorize?client_id=841045154903490581&scope=bot&scope=applications.commands
-
-## slash cmds in d.js
-
-https://gist.github.com/advaith1/287e69c3347ef5165c0dbde00aa305d2
+[create a user](https://orahow.com/create-user-in-postgresql/)
