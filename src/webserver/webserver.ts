@@ -7,6 +7,7 @@ export class Webserver {
   server?: http.Server;
   constructor() {
     this.app = express();
+    this.app.set("trust proxy", true);
 
     this.app.use(cors());
     this.app.use(express.json());

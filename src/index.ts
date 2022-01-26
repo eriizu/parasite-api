@@ -4,35 +4,45 @@ import { User } from "./entity/User";
 import { Visit } from "./entity/Visit";
 import { Page } from "./entity/Page";
 
+import { Webserver } from "./webserver";
+import { VisitController, AdController } from "./controller/";
+
 createConnection()
   .then(async (connection) => {
-    let page = new Page();
-    page.title = "2 Téléchargez de la RAM!";
-    page.description =
-      "Téléchargez de la ram en toute discretion grace à notre méthode reconnue par le gouvernement du Venezuela !";
-    page.img =
-      "https://mppre.gob.ve/wp-content/uploads/2021/02/ESEQUIBO-LAUDO-ARBITRAL-VENEZUELA.jpg";
-    page.url = "https://public.ecole-89.com/~cameron/";
+    let webserv = new Webserver();
 
-    page = await connection.manager.save(page);
+    webserv.app.use("/visits", VisitController(connection.manager));
+    webserv.app.use("/ad", AdController(connection.manager));
+    webserv.start(3000);
 
-    let visit = new Visit();
-    visit.page = page;
-    visit.ip = "192.168.2.45";
+    // let page = new Page();
+    // page.title = "2 Téléchargez de la RAM!";
+    // page.description =
+    //   "Téléchargez de la ram en toute discretion grace à notre méthode reconnue par le gouvernement du Venezuela !";
+    // page.img =
+    //   "https://mppre.gob.ve/wp-content/uploads/2021/02/ESEQUIBO-LAUDO-ARBITRAL-VENEZUELA.jpg";
+    // page.url = "https://public.ecole-89.com/~cameron/";
 
-    visit = await connection.manager.save(visit);
+    // page = await connection.manager.save(page);
 
-    visit = new Visit();
-    visit.page = page;
-    visit.ip = "172.17.250.1";
+    // let visit = new Visit();
+    // visit.page = page;
+    // visit.ip = "192.168.2.45";
 
-    visit = await connection.manager.save(visit);
+    // visit = await connection.manager.save(visit);
 
-    let res = await connection.manager.findOne(Page, page.id, { relations: ["visits"] });
-    console.log(res);
+    // visit = new Visit();
+    // visit.page = page;
+    // visit.ip = "172.17.250.1";
 
-    let res2 = await connection.manager.findOne(Visit, visit.id, { relations: ["page"] });
-    console.log(res2);
+    // visit = await connection.manager.save(visit);
+
+    // let res = await connection.manager.findOne(Page, page.id, { relations: ["visits"] });
+    // console.log(res);
+
+    // let res2 = await connection.manager.findOne(Visit, visit.id, { relations: ["page"] });
+    // console.log(res2);
+
     // console.log("Inserting a new user into the database...");
     // const user = new User();
     // user.firstName = "Timber";
@@ -46,15 +56,12 @@ createConnection()
     // console.log("Loaded users: ", users);
 
     // console.log("Here you can setup and run express/koa/any other framework.");
-    process.exit(0);
+    // process.exit(0);
   })
   .catch((error) => {
     console.log(error);
     process.exit(1);
   });
 
-import { Webserver } from "./webserver";
-let webserv = new Webserver();
 let hello: string = "hello world";
-webserv.start(3000);
 console.log(hello);
