@@ -24,7 +24,9 @@ export function AdController(db_manager: typeorm.EntityManager) {
       res.status(404).send(err);
       return;
     }
-    res.send(visit);
+    let page: Page = visit.page as Page;
+    let { title, description, url } = page;
+    res.send({ title, description, url });
   });
   return router;
 }
