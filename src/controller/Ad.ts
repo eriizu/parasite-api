@@ -12,15 +12,14 @@ export function AdController(db_manager: typeorm.EntityManager) {
     let visit: Visit;
 
     try {
-      let res = await db_manager
+      let qres = await db_manager
         .getRepository(Visit)
         .createQueryBuilder("visit")
         .where("visit.ip = :ip", { ip })
         .addOrderBy("visit.on", "DESC")
         .leftJoinAndSelect("visit.page", "page")
-        .getOne();
-      if (res) visit = res;
-      else throw "no visit found";
+        .getOneOrFail();
+      visit = qres;
     } catch (err) {
       res.status(404).send(err);
       return;

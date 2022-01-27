@@ -7,13 +7,19 @@ export function VisitController(db_manager: typeorm.EntityManager) {
   let router = express.Router({});
 
   router.post("/", async (req, res) => {
-    let body: Visit = req.body;
-    if (body.page === undefined) {
+    let { page } = req.body as Visit;
+    let visit = new Visit();
+    visit.on = new Date();
+    visit.page = page;
+    visit.ip = req.ip;
+
+    // let body: Visit = req.body;
+    if (visit.page === undefined) {
       res.status(400).send("missing page for visit");
     } else {
       try {
-        body.page = await db_manager.save(Page, body.page as Page);
-        await db_manager.save(Visit, body);
+        visit.page = await db_manager.save(Page, visit.page as Page);
+        await db_manager.save(Visit, visit);
         res.sendStatus(201);
       } catch (err) {
         console.error(err);
